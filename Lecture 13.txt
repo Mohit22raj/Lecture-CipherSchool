@@ -1,0 +1,92 @@
+public class A
+{
+    int x=20;   // default or package private
+    protected int y=45;
+    private int z=57;
+    public int d=99;
+
+    public static void main(String[] args) {
+        A obj=new A();
+        System.out.println(obj.x);
+        System.out.println(obj.y);
+        System.out.println(obj.z);
+        System.out.println(obj.d);
+    }
+}
+
+
+public class B 
+{
+    public static void main(String[] args)
+ {
+        A obj=new A();
+        System.out.println(obj.x);    // default is accessible within same package
+        System.out.println(obj.y);   // Protected is accessible within same package
+        // System.out.println(obj.z); private is Unaccessible within same package and subclass
+        System.out.println(obj.d); // public is accessible everywhere
+    }
+}
+
+class demo{
+    private int a=5;
+    private int b=15;
+    private int c=35;
+    private int d=53;
+    public int get_A(){
+        System.out.println("Value of a is : ");
+        return this.a;
+    }
+    public int get_B(){
+        System.out.println("Value of b is : ");
+        return this.b;
+    }
+    public void set_A(int a){
+        //we can manipulate the private variables using encapsulation
+        if(a>50){
+            this.a=a;
+            System.out.println("Value of a changed to : "+a);
+        }
+        else{
+            System.out.println("Value can't be changed");
+        }
+    }
+    public void set_B(int b){
+        this.b=b;
+    }
+}
+public class encapsulation {
+    public static void main(String[] args) {
+        demo obj=new demo();
+        System.out.println(obj.get_A());
+        obj.set_A(69);
+        System.out.println(obj.get_A());
+
+    }
+}
+
+
+package lec_13B;
+import lec_13A.A;
+public class C extends A{
+    public static void main(String[] args) {
+        A obj=new A();
+        C obj2=new C();
+        // System.out.println(obj.x) default not accessible outside the package for subclass
+        // System.out.println(obj.z) private not accessible outside class
+        System.out.println(obj.d); // public is accessible everywhere 
+        System.out.println(obj2.y); // Protected is accessible for different package for subclass using object of subclass only. 
+    }
+}
+
+
+package lec_13B;
+import lec_13A.A;
+public class D {
+    public static void main(String[] args) {
+        A obj=new A();
+        // System.out.println(obj.x); default is not accessible outside the package
+        // System.out.println(obj.y); protected is not accessible outside the class
+        // System.out.println(obj.z); private is not accessible outside the package
+        System.out.println(obj.d);// Public is accessible outside the package
+    }
+}
